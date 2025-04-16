@@ -68,7 +68,7 @@
 
   <div class="message" id="message"></div>
   <div class="view-data">
-    <a href="http://localhost:8080/data" target="_blank">View Registered Users</a>
+    <a href="/data" target="_blank">View Registered Users</a>
   </div>
 
   <script>
@@ -79,7 +79,7 @@
       const email = document.getElementById("email").value;
 
       try {
-        const response = await fetch("http://localhost:8080/register", {
+        const response = await fetch("/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
