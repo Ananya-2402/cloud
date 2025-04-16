@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    form {
+      background: #fff;
+      padding: 80px;
+      border-radius: 8px;
+      width: 300px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .view-data {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .view-data a {
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2 style="text-align: center;">Register</h2>
+
+  <form id="registrationForm">
+    Name: <input type="text" name="name" id="name" required><br>
+    Email: <input type="email" name="email" id="email" required><br>
+    <input type="submit" value="Register">
+  </form>
+
+  <div class="message" id="message"></div>
+  <div class="view-data">
+    <a href="http://localhost:8080/data" target="_blank">View Registered Users</a>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      try {
+        const response = await fetch("http://localhost:8080/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({
+            name: name,
+            email: email
+          })
+        });
+
+        const text = await response.text();
+
+        if (response.ok) {
+          document.getElementById("message").innerHTML = `<span style='color:green;'>✔ ${text}</span>`;
+          document.getElementById("registrationForm").reset();
+        } else {
+          document.getElementById("message").innerHTML = `<span style='color:red;'>✖ ${text}</span>`;
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("message").innerHTML = `<span style='color:red;'>✖ Error: ${error}</span>`;
+      }
+    });
+  </script>
+
+</body>
+
+</html>
