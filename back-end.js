@@ -6,7 +6,7 @@ app.use(cors());
 const { Database } = require("@sqlitecloud/drivers");
 
 const db = new Database(
-  `sqlitecloud://crfbccaanz.g2.sqlite.cloud:8860/chinook.sqlite?apikey=KtqGuVudsPBBMaQPn0V1qaISMESzWUBZEhTU5SNQq8M`
+  `sqlitecloud://caj19lkjhk.g2.sqlite.cloud:8860/my-database?apikey=zX68qUqaaCe3nXSuvjJm6IZpa0MwkWNgiRgsUEtZ10Y `
 );
 
 app.use(express.urlencoded({ extended: true }));
